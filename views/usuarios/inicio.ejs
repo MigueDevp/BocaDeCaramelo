@@ -1,0 +1,96 @@
+<%- include("../templates/encabezado.ejs") %>
+<%- include("../templates/menu.ejs") %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+    
+    body {
+        background-color: rgb(164, 236, 250);
+    }
+
+    
+    .container-welcome {
+        text-align: center;
+        background-color: #f8d881; /* Fondo amarillo pastel */
+        padding: 20px;
+    }
+
+    .container-welcome h1 {
+        font-size: 3rem;
+        color: #fff;
+        text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .container-welcome h2 {
+        font-size: 1.8rem;
+        color: #ff6f61;
+    }
+
+    
+    .container-products {
+        background-color: rgb(164, 236, 250); 
+        padding: 20px;
+    }
+
+    .card {
+        background-color: #f5e8e6;
+    }
+
+    .card-title {
+        color: #0092dd;
+    }
+</style>
+
+<div class="container-welcome">
+    <div class="side-image left-image"></div>
+    <h1>Bienvenido a <span style="color: #fff;">Boca de Caramelo</span></h1>
+    <h2>Abre tu Boca a un mundo de sabores</h2>
+    <div class="side-image left-image"></div>
+</div>
+
+<div class="container-products mt-5">
+    <h2 class="text-center mb-4">Productos</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="/imagenes/Chocolates.jpg" class="card-img-top" alt="Producto 1">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Chocolates</h5>
+                    <p class="card-text">Deliciosos chocolates para satisfacer tu antojo.</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">Precio: $10.99</p>
+                    <a href="#" class="btn btn-primary">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="/imagenes/cacahuatees.png" class="card-img-top" alt="Producto 2">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Cacahuates</h5>
+                    <p class="card-text">Cacahuates tostados y salados para tu snack favorito.</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">Precio: $8.99</p>
+                    <a href="#" class="btn btn-primary">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="/web/images/bombones.jpg" class="card-img-top" alt="Producto 3">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Bombones</h5>
+                    <p class="card-text">Bombones suaves y rellenos, ¡perfectos para compartir!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">Precio: $12.99</p>
+                    <a href="#" class="btn btn-primary">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

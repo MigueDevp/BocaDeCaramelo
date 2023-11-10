@@ -1,0 +1,154 @@
+
+<%- include("../templates/encabezado.ejs") %>
+<%- include("../templates/menu.ejs") %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<div class="container mt-5 text-center">
+    <h2>PRODUCTOS MAS VENDIDOS 🔥</h2>
+</div>
+<div class="container mt-5" id="carrusel">
+    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="2200">
+        
+        <div class="carousel-inner">
+            <% products.forEach((producto, index) => { %>
+                <div class="carousel-item <% if (index === 0) { %>active<% } %>">
+                    <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= producto.nombre %></h5>
+                                    <p class="card-text">Categoría: <%= producto.categoria %></p>
+                                    <p class="card-text">Precio: <%= producto.precio %></p>
+                                    <p class="card-text">Stock: <%= producto.stock %></p>
+                                    <img src="/images/<%= producto.foto %>" width="100px" alt="">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" aria-setsize="300px"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next" id="carouselExample">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Menú de Productos</h2>
+
+    <div class="row">
+        <!-- Categoría: Bebidas -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Bebidas</h5>
+                    <p class="card-text">Selecciona tus bebidas favoritas.</p>
+                    <a href="#" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Dulces y Golosinas</h5>
+                    <p class="card-text">Los mejores dulces y golosinas para ti.</p>
+                    <a href="#" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Comida Rapida</h5>
+                    <p class="card-text">Deliciosos platillos listos para disfrutar.</p>
+                    <a href="#" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Galletas</h5>
+                    <p class="card-text">Las mejores galletas te esperan aquí.</p>
+                    <a href="#" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Helados y Raspados</h5>
+                    <p class="card-text">Refresca tu paladar.</p>
+                    <a href="#" class="btn btn-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Chicles</h5>
+                    <p class="card-text">Exquisitos chicles de todos los sabores.</p>
+                    <a href="#" class="btn btn-primary">Ver productos</a>
+                </div>        
+            </div>
+        </div>
+
+        
+
+        <style>
+            
+            .carousel-inner {
+                max-width: 2000px; 
+                margin: 0 auto; 
+            }
+            
+            
+            .card {
+                border: 4px solid #191a18; 
+            }
+            
+            
+            .card {
+                margin-bottom:0px;
+            }
+            
+            #carrusel{
+                background-color: rgb(0, 255, 136);
+                border-radius: 1.5px;
+                padding: 10px;
+
+            
+            }
+            
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 1em 0;
+                width: 100%; 
+                margin-left: 0px;
+                margin-right: 0px;
+            
+                }
+
+                .carouselExample{
+                    width: 3000px;
+                    height: 3000px;
+                }
+            
+            
+                    </style>
+        
