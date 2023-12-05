@@ -1,12 +1,12 @@
 var conexion =require("./conexion").conexionProductos;
-var Producto=require("../modelos/ProductosBoca");
+var Producto=require("../modelos/Producto");
 
 async function mostrarProductos(){
     var products=[];
     try{
         var productosBD= await conexion.get();
         productosBD.forEach(producto =>{
-        console.log(productosBD);
+        
          var producto1=new Producto(producto.id,producto.data())
      if (producto1.bandera==0){
         products.push(producto1.obtenerProducto);
@@ -39,7 +39,7 @@ async function nuevoProducto(newProducts){
     return error;
  }
  
- async function buscarPorId(id){
+ async function buscarPorIdP(id){
     var produc;
     try{
         var productoBD=await conexion.doc(id).get();
@@ -53,9 +53,37 @@ async function nuevoProducto(newProducts){
     }
     return  produc;
  } 
+
+ /*async function buscarPorIdP(id){
+    try {
+        if (!id) {
+            console.log("ID no válido:", id);
+            throw new Error("ID no válido");
+        }
+
+        var productoBD = await conexion.doc(id).get();
+
+        if (!productoBD.exists) {
+            console.log("El usuario no existe:", id);
+            return null; // O puedes lanzar un error según tus necesidades
+        }
+
+        var productoObjeto = new Producto(productoBD.id, productoBD.data());
+
+        if (productoObjeto.bandera !== 0) {
+            console.log("El usuario no es válido:", productoObjeto);
+            return null; // O puedes lanzar un error según tus necesidades
+        }
+
+        return productoObjeto.obtenerProducto;
+    } catch (err) {
+        console.log("Error al recuperar el producto (función buscarPorId):", err);
+        throw err; // Propaga el error para que pueda ser manejado en el contexto superior
+    }
+}*/
  async function modificarProducto(datos){
     var error=1;
-    var produc=await buscarPorId(datos.id);
+    var produc=await buscarPorIdP(datos.id);
     if(produc!=undefined){ 
     var produc=new Producto(datos.id, datos);
         if(produc.bandera==0){
@@ -75,9 +103,40 @@ async function nuevoProducto(newProducts){
     return error;
 }
 
+async function login(datos) {
+    var user;
+    var usuarioBd = await conexion.where("usuario", "==", datos.usuario).get();
+
+    if (usuarioBd.empty) {
+        console.log("Usuario no existe");
+        return user;
+    } else {
+        usuarioBd.forEach((doc) => {
+            var validP = validarPassword(datos.password, doc.data().salt, doc.data().password);
+
+            if (validP === false) {
+                console.log("Contraseña incorrecta");
+                user = 0; // Usuario no autenticado
+            } else {
+                console.log("Inicio de sesión exitoso");
+
+                // Verificar si es un administrador
+                if (datos.usuario === "admin" && datos.password === "admin") {
+                    user = 2; // Administrador
+                } else {
+                    user = 1; // Usuario normal
+                }
+            }
+        });
+    }
+
+    return user;
+}
+
+
  async function borrarProducto(id){
     var error=1;
-    var produc=await buscarPorId(id);
+    var produc=await buscarPorIdP(id);
     if(produc!=undefined){ 
     try{
         await conexion.doc(id).delete();
@@ -95,7 +154,8 @@ return error;
  module.exports={
     mostrarProductos,
     nuevoProducto,
-    buscarPorId,
+    buscarPorIdP,
     modificarProducto,
-    borrarProducto
+    borrarProducto,
+    login
  };

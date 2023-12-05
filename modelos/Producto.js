@@ -1,4 +1,4 @@
-class ProductosBoca {
+class Producto {
     constructor(id, data) {
         this.bandera = 0;
         this.id = id;
@@ -88,4 +88,4 @@ class ProductosBoca {
     }
 }
 
-module.exports = ProductosBoca;
+module.exports = Producto;

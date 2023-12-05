@@ -1,0 +1,101 @@
+<%- include("../templates/encabezado.ejs") %>
+<%- include("../templates/menu.ejs") %>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+
+            <form action="/realizarCompra" method="post">
+                <label for="producto">Producto:</label>
+                <select name="producto" id="producto">
+                    <option value="Galletas Bombón">Galletas Bombón</option>
+                    <option value="Galletas Azucaradas">Galletas Azucaradas</option>
+                    <option value="Galletas Emperador">Galletas Emperador</option>
+                    <option value="Chokkies">Chokkies</option>
+                    <option value="Pedo de Monja">Pedo de Monja</option>
+                </select>
+
+                <!-- Tamaño -->
+                <label for="tamaño">Tamaño:</label>
+                <select name="tamaño" id="tamaño">
+                    <option value="Pequeño">Pequeño</option>
+                    <option value="Grande">Grande</option>
+                </select>
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" min="1" value="1">
+
+                <input type="submit" value="Comprar" class="btn btn-primary">
+            </form>
+            <!-- Fin del formulario de compra -->
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos generales */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    .container-products {
+        margin-top: 20px;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img-top {
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        margin-bottom: 10px;
+    }
+
+    /* Estilos específicos para la categoría */
+    .categoria {
+        background-color: #444cf7;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .categoria h2 {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* Estilos para el formulario de compra */
+    form {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    select, input {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1
+    }
+</style>

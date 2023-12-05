@@ -1,20 +1,28 @@
-<%- include("../templates/encabezado.ejs") %>
-<%- include("../templates/menu.ejs") %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<%- include("../templates/encabezado") %>
+<%- include("../templates/menu") %>
 
 <style>
-    
-    body {
-        background-color: rgb(164, 236, 250);
+     .shine-text {
+        animation: shine 2s infinite;
     }
 
-    
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+
+    .details-btn {
+        transition: transform 0.3s;
+    }
+
+    .details-btn:hover {
+        transform: scale(1.1);
+    }
+
     .container-welcome {
         text-align: center;
-        background-color: #f8d881; /* Fondo amarillo pastel */
+        background-color:#444cf7; /* Fondo amarillo pastel */
         padding: 20px;
     }
 
@@ -28,12 +36,13 @@
 
     .container-welcome h2 {
         font-size: 1.8rem;
-        color: #ff6f61;
+        color: #faf9f9;
+    font-style: bold;
     }
 
     
     .container-products {
-        background-color: rgb(164, 236, 250); 
+        background-color: #444cf7; 
         padding: 20px;
     }
 
@@ -44,53 +53,106 @@
     .card-title {
         color: #0092dd;
     }
+
+    .rainbow-bg {
+    background: linear-gradient(to right, rgb(41, 30, 194), indigo, blue, green, yellow, orange, red);
+    background-size: 1400% 100%;
+    animation: rainbowSlide 300s linear infinite;
+}
+
+@keyframes rainbowSlide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 1400% 0;
+    }
+}
 </style>
 
-<div class="container-welcome">
+<div class="container-welcome rainbow-bg">
     <div class="side-image left-image"></div>
     <h1>Bienvenido a <span style="color: #fff;">Boca de Caramelo</span></h1>
-    <h2>Abre tu Boca a un mundo de sabores</h2>
+    <h2>"Abre tu Boca a un mundo de sabores"</h2>
     <div class="side-image left-image"></div>
 </div>
 
+
 <div class="container-products mt-5">
-    <h2 class="text-center mb-4">Productos</h2>
+    <h2 class="text-center mb-4" style="color: #ffffff; font-weight: bold;">CATEGORÍAS</h2>
     <div class="row">
+        <!-- Comida Rápida -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="/imagenes/Chocolates.jpg" class="card-img-top" alt="Producto 1">
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Chocolates</h5>
-                    <p class="card-text">Deliciosos chocolates para satisfacer tu antojo.</p>
-                    <p class="card-text" style="font-weight: bold; color: #0092dd;">Precio: $10.99</p>
-                    <a href="#" class="btn btn-primary">Ver detalles</a>
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Comida Rápida</h5>
+                    <p class="card-text">Disfruta de nuestra deliciosa selección de comida rápida. ¡Satisfacción garantizada!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">¡COMPRA YA!</p>
+                    <a href="/comidaR" class="btn btn-primary details-btn" id="id">Ver detalles</a>
                 </div>
             </div>
         </div>
 
+        <!-- Helados -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="/imagenes/cacahuatees.png" class="card-img-top" alt="Producto 2">
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Cacahuates</h5>
-                    <p class="card-text">Cacahuates tostados y salados para tu snack favorito.</p>
-                    <p class="card-text" style="font-weight: bold; color: #0092dd;">Precio: $8.99</p>
-                    <a href="#" class="btn btn-primary">Ver detalles</a>
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Helados</h5>
+                    <p class="card-text">Descubre nuestros helados de alta calidad con sabores irresistibles. ¡Una experiencia refrescante!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">¡COMPRA YA!</p>
+                    <a href="/helados" class="btn btn-primary details-btn" id="id">Ver detalles</a>
                 </div>
             </div>
         </div>
 
+        <!-- Chicles -->
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="/web/images/bombones.jpg" class="card-img-top" alt="Producto 3">
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Bombones</h5>
-                    <p class="card-text">Bombones suaves y rellenos, ¡perfectos para compartir!</p>
-                    <p class="card-text" style="font-weight: bold; color: #0092dd;">Precio: $12.99</p>
-                    <a href="#" class="btn btn-primary">Ver detalles</a>
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Chicles</h5>
+                    <p class="card-text">Explora nuestra variedad de chicles con sabores únicos. ¡Una explosión de frescura!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">¡COMPRA YA!</p>
+                    <a href="/chicles" class="btn btn-primary details-btn" id="id">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dulces y Golosinas -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Dulces y Golosinas</h5>
+                    <p class="card-text">Déjate tentar por nuestra amplia selección de dulces y golosinas. ¡Sabor inigualable!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">¡COMPRA YA!</p>
+                    <a href="/dulces" class="btn btn-primary details-btn" id="id">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bebidas -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Bebidas</h5>
+                    <p class="card-text">Refresca tu día con nuestras deliciosas bebidas. ¡Una explosión de sabores!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">¡COMPRA YA!</p>
+                    <a href="/bebidas" class="btn btn-primary details-btn" id="id">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galletas -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #ff6f61; font-weight: bold;">Galletas</h5>
+                    <p class="card-text">Disfruta de nuestras irresistibles galletas con diversos sabores. ¡Una delicia crujiente!</p>
+                    <p class="card-text" style="font-weight: bold; color: #0092dd;">¡COMPRA YA!</p>
+                    <a href="/galletas" class="btn btn-primary details-btn" id="id">Ver detalles</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 

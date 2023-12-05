@@ -8,9 +8,11 @@ admin.initializeApp({
 var micuenta=admin.firestore();
 
 var conexionUsuarios=micuenta.collection("usuario");
+var conexionVentas=micuenta.collection("compras");
 var conexionProductos=micuenta.collection("productosBoca");
 module.exports={
     conexionUsuarios,
-    conexionProductos
+    conexionProductos,
+    conexionVentas
 };
 

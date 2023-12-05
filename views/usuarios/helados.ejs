@@ -1,0 +1,88 @@
+<%- include("../templates/encabezado.ejs") %>
+<%- include("../templates/menu.ejs") %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card p-4">
+                <form action="/realizarCompra" method="post">
+                    <label for="producto">Producto:</label>
+                    <select name="producto" id="producto" class="form-control">
+                        <option value="Helado de Fresa">Helado de Fresa</option>
+                        <option value="Helado de Vainilla">Helado de Vainilla</option>
+                        <option value="Helado de Frambuesa">Helado de Frambuesa</option>
+                        <option value="Helado de Limón">Helado de Limón</option>
+                        <option value="Helado de Chocolate">Helado de Chocolate</option>
+                    </select>
+
+                    <!-- Tamaño -->
+                    <label for="tamaño">Tamaño:</label>
+                    <select name="tamaño" id="tamaño" class="form-control">
+                        <option value="Chico">Chico</option>
+                        <option value="Mediano">Mediano</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" name="cantidad" id="cantidad" min="1" value="1" class="form-control">
+
+                    <input type="submit" value="Comprar" class="btn btn-purple mt-3">
+                </form>
+                <!-- Fin del formulario de compra -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos generales */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    /* Estilos para el formulario de compra */
+    form {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    select,
+    input {
+        margin-bottom: 10px;
+        padding: 8px;
+    }
+
+    .btn-purple {
+        background-color: #444cf7; /* Tonos de morado */
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-purple:hover {
+        background-color: #2f3499;
+        color:white; /* Tonos de morado más oscuro */
+    }
+
+    /* Estilos para el contenedor de la tarjeta */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>

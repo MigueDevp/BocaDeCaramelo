@@ -1,0 +1,165 @@
+<%- include("../templat/encabezado.ejs") %>
+<%- include("../templat/menu.ejs") %>
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1>EDITAR PRODUCTO</h1>
+        </div>
+    
+        <div class="card-body"></div>
+        <form action="/editarProducto" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<%= producto.nombre %>">
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="text" class="form-control" id="precio" name="precio" value="<%= producto.precio %>">
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <input type="text" class="form-control" id="categoria" name="categoria" value="<%= producto.categoria %>">
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock:</label>
+                <input type="text" class="form-control" id="stock" name="stock" value="<%= producto.stock %>">
+            </div>
+
+            <div class="form-group">
+                <label for="foto">Subir nueva foto:</label>
+                <input type="file" class="form-control" id="foto" name="foto">
+                <img src="/images/<%= producto.foto %>" width="100px" alt="Foto actual del producto" class="img-preview">
+            </div>
+
+            <button type="submit" class="btn btn-editar">Actualizar Producto</button>
+        </form>
+        
+        <div class="card-footer"></div>
+    </div>
+</div>
+
+    <style>
+    .container {
+        margin-top: 20px;
+    }
+
+    .btn {
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 2px 2px;
+    }
+
+    .btn-editar {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    .btn-borrar {
+        background-color: #e74c3c;
+        color: #fff;
+    }
+
+    td img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .card {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #444cf7;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #444cf7;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        display: inline-block;
+        padding: 6px 12px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-right: 5px;
+        color: #fff;
+    }
+
+    a.editar {
+        background-color: #2ecc71;
+    }
+
+    a.borrar {
+        background-color: #e74c3c;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .mb-3 {
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        background-color: #444cf7;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .img-preview {
+        margin-top: 10px;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+</style>

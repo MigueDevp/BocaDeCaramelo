@@ -1,5 +1,6 @@
-<%- include("../templates/encabezado") %>
-<%- include("../templates/menu") %>
+
+<%- include("../templates/encabezado.ejs") %>
+<%- include("../templates/menu.ejs") %>
 
 
 <section>
@@ -11,13 +12,13 @@
     <p>Además de nuestra amplia gama de dulces, también nos enorgullece brindar un servicio excepcional. Nuestro equipo está aquí para ayudarte a encontrar tus dulces favoritos, ofrecer recomendaciones y garantizar que tu visita sea tan dulce como nuestros productos.</p>
 
     <p>¡Explora nuestro mundo de golosinas y déjate llevar por la magia de los sabores! Estamos emocionados de compartir contigo momentos llenos de alegría y dulzura.</p>
-
-    <p> Elaborada en la EScuela Tecnologica de San juan del Rio por:</p>
-    <p> migue p </p>
-    <p> memorama </p>
-    <p> marquiños</p>
-    <p> pollo </p> 
-    <p> Fundador bocalimpia  </p> 
+    <p>
+    <h3> Elaborada en la Escuela Tecnologica de San juan del Rio por:</h3>
+    <p> Miguel Angel Ramirez Ramirez    </p>
+    <p> Angel Guillermo Vanegas Bernal  </p>
+    <p> Marco Antonio Nieto Arellano    </p>
+    <p> Guiovani Villagran Valdes   </p> 
+    <p> Carlos Bocanegra Trejo: Fundador    </p> 
     
 </section>
 
@@ -25,27 +26,59 @@
     section {
         max-width: 800px;
         margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
+        padding: 10px;
+        background-color: rgb(255, 255, 255);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
+    h2 {
+    font-family: 'Roboto', sans-serif; /* Cambia la fuente según tus preferencias */
+    color: #3498db; /* Cambia el color del texto según tus preferencias */
+    border-bottom: 2px solid #3498db; /* Línea inferior */
+    padding-bottom: 5px; /* Espaciado bajo la línea */
+    margin-bottom: 20px; /* Espaciado inferior */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+}
+
+
+h3 {
+    font-family: 'Roboto', sans-serif; 
+    font-size: medium;
+    color: #3498db; 
+    border-bottom: 2px solid #3498db; 
+    padding-bottom: 5px; 
+    margin-bottom: 20px; 
+}
+
+
+
+
+
     p {
-        line-height: 1.6;
-        color: #666;
+        line-height: 1.5;
+        color: black;
+        font-family: cursive;
     }
+
 
     .biography {
-        display: flex;
-        align-items: center;
-        margin-top: 20px;
-    }
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #f8f8f8; /* Cambia el color según tus preferencias */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    .biography img {
-        border-radius: 50%;
-        margin-right: 20px;
-        max-width: 150px;
-    }
+
+.biography img {
+    border-radius: 50%;
+    margin-right: 20px;
+    max-width: 150px;
+    transition: transform 0.3s ease-in-out; 
+}
+
 
     footer {
         background-color: #333;
@@ -55,3 +88,4 @@
     }
 </style>
 
+<%- include("../templates/pie") %>

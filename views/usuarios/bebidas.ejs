@@ -1,0 +1,113 @@
+<%- include("../templates/encabezado.ejs") %>
+<%- include("../templates/menu.ejs") %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/realizarCompra" method="post">
+                        <label for="producto">Producto:</label>
+                        <select name="producto" id="producto">
+                            <option value="Boing de Mango 500ml">Boing de Mango 500ml</option>
+                            <option value="Boing de Guayaba 500ml">Boing de Guayaba 500ml</option>
+                            <option value="Agua de Jamaica">Agua de Jamaica</option>
+                        </select>
+
+                        <!-- Tamaño -->
+                        <label for="tamaño">Tamaño:</label>
+                        <select name="tamaño" id="tamaño">
+                            <option value="500ml">500ml</option>
+                            <option value="250ml">250ml</option>
+                            <option value="1L">1L</option>
+                        </select>
+
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" name="cantidad" id="cantidad" min="1" value="1">
+
+                        <input type="submit" value="Comprar" class="btn btn-primary">
+                    </form>
+                    <!-- Fin del formulario de compra -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos generales */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        margin-bottom: 10px;
+    }
+
+    /* Estilos específicos para la categoría */
+    .categoria {
+        background-color: #444cf7;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .categoria h2 {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* Estilos para el formulario de compra */
+    form {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    label {
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    select, input {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #8a2be2; /* Color morado */
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background-color: #444cf7; /* Color morado */
+        color: #fff;
+        border: 1px solid #444cf7; /* Color morado */
+        border-radius: 8px;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #3a40c2; /* Color morado oscuro */
+    }
+</style>

@@ -1,13 +1,10 @@
 
-<%- include("../templates/encabezado.ejs") %>
-<%- include("../templates/menu.ejs") %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<%- include("../templates/encabezado") %>
+<%- include("../templates/menu") %>
+
 
 <div class="container mt-5 text-center">
-    <h2>PRODUCTOS MAS VENDIDOS 🔥</h2>
+    <h2 class="msjprod">PRODUCTOS MAS VENDIDOS 🔥</h2>
 </div>
 <div class="container mt-5" id="carrusel">
     <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="2200">
@@ -42,8 +39,10 @@
 </div>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Menú de Productos</h2>
-
+    <div class="menuprod">
+        <h2 class="text-center mb-4">Menú de Productos</h2>
+    </div>
+    
     <div class="row">
         <!-- Categoría: Bebidas -->
         <div class="col-md-4 mb-4">
@@ -51,7 +50,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Bebidas</h5>
                     <p class="card-text">Selecciona tus bebidas favoritas.</p>
-                    <a href="#" class="btn btn-primary">Ver productos</a>
+                    <a href="/bebidas" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
         </div>
@@ -61,7 +60,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Dulces y Golosinas</h5>
                     <p class="card-text">Los mejores dulces y golosinas para ti.</p>
-                    <a href="#" class="btn btn-primary">Ver productos</a>
+                    <a href="/dulces" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
         </div>
@@ -71,7 +70,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Comida Rapida</h5>
                     <p class="card-text">Deliciosos platillos listos para disfrutar.</p>
-                    <a href="#" class="btn btn-primary">Ver productos</a>
+                    <a href="/comidaR" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
         </div>
@@ -81,7 +80,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Galletas</h5>
                     <p class="card-text">Las mejores galletas te esperan aquí.</p>
-                    <a href="#" class="btn btn-primary">Ver productos</a>
+                    <a href="/galletas" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
         </div>
@@ -91,7 +90,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Helados y Raspados</h5>
                     <p class="card-text">Refresca tu paladar.</p>
-                    <a href="#" class="btn btn-primary">Ver productos</a>
+                    <a href="/helados" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
         </div>
@@ -101,7 +100,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Chicles</h5>
                     <p class="card-text">Exquisitos chicles de todos los sabores.</p>
-                    <a href="#" class="btn btn-primary">Ver productos</a>
+                    <a href="/chicles" class="btn btn-primary">Ver productos</a>
                 </div>        
             </div>
         </div>
@@ -110,6 +109,10 @@
 
         <style>
             
+            .menuprod{
+                background-color: white;
+
+            }
             .carousel-inner {
                 max-width: 2000px; 
                 margin: 0 auto; 
@@ -119,6 +122,16 @@
             .card {
                 border: 4px solid #191a18; 
             }
+
+            .msjprod{
+                color:rgb(43, 25, 207);
+                background-color: white;
+                font-size: 50px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        font-weight: bold;
+        letter-spacing: 2px;
+            }
             
             
             .card {
@@ -126,7 +139,7 @@
             }
             
             #carrusel{
-                background-color: rgb(0, 255, 136);
+                background-color:#444cf7;
                 border-radius: 1.5px;
                 padding: 10px;
 
@@ -148,7 +161,7 @@
                     width: 3000px;
                     height: 3000px;
                 }
-            
+              
             
                     </style>
         

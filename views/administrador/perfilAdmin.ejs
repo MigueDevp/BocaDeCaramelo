@@ -1,0 +1,21 @@
+<%- include("../templat/encabezado") %>
+<%- include("../templat/menu") %>
+
+<!-- Resto de tu código HTML y estilos -->
+
+<div class="perfil-container">
+    <% if (admin) { %>
+        <div class="perfil-box">
+            <img src="/images/<%= admin.foto %>" alt="Foto de perfil">
+            <h2><%= admin.nombre %></h2>
+            <p>ID: <%= admin.id %></p>
+            <p>Usuario: <%= admin.usuario %></p>
+            <!-- Otros detalles del administrador -->
+        </div>
+        <a href="/editarPerfilAdmin" class="btn btn-success">Editar Perfil</a>
+        <a href="/borrarPerfilAdmin" class="btn btn-danger">Borrar Perfil</a>
+        <a href="/adminDashboard" class="btn btn-cerrar-sesion">Volver al Dashboard</a>
+    <% } else { %>
+        <p>Error al cargar el perfil</p>
+    <% } %>
+</div>

@@ -6,6 +6,7 @@ class Usuario{
         this.usuario=data.usuario;
         this.password=data.password;
         this.salt=data.salt;
+        this.foto=data.foto;
     }
 
 set id(id){
@@ -31,6 +32,11 @@ set password(password){
 set salt(salt){
     salt.length>0?this._salt=salt:this.bandera=1;
 }
+
+set foto(foto){
+    foto.length>0?this._foto=foto:this.bandera=1;
+}
+
 get id(){
     return this._id;
 }
@@ -46,6 +52,10 @@ get password(){
 get salt(){
     return this._salt;
 }
+get foto(){
+    return this._foto;
+}
+
 get obtenerUsuario(){
     if(this._id != null)
 
@@ -54,7 +64,8 @@ get obtenerUsuario(){
         nombre:this.nombre,
         usuario:this.usuario,
         password:this.password,
-        salt:this.salt
+        salt:this.salt,
+        foto:this.foto
 
     }
     else
@@ -62,7 +73,8 @@ get obtenerUsuario(){
         nombre:this.nombre,
         usuario:this.usuario,
         password:this.password,
-        salt:this.salt
+        salt:this.salt,
+        foto:this.foto
 
     }
     }

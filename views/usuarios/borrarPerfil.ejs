@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Has Salido</title>
+</head>
+<body>
+    <div>
+        <h1>Tu cuenta ha sido borrada</h1>
+        <p>Gracias por usar nuestro servicio.</p>
+        <button id="salirButton">Salir</button>
+    </div>
+
+    <script>
+        document.getElementById("salirButton").addEventListener("click", function() {
+            window.location.href = "/";
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    
+        
+    
+
+    body {
+        width: 100%;
+  height: 100%;
+  /* Add your background pattern here */
+  background-color: #e5e5f7;
+  background-image: radial-gradient(#444cf7 10%, transparent 10%),
+                      radial-gradient(#444cf7 10%, transparent 10%);
+  background-size: 100px 100px;
+  background-position: 0 0, 50px 50px;
+    color: white; /* Texto blanco */
+    font-size: 24px; /* Tamaño de fuente grande */
+    text-align: center; /* Alineación del texto al centro */
+}
+
+div {
+    margin: 50px auto; /* Margen y centrado del div */
+    padding: 20px; /* Relleno del div */
+    background-color: #444cf7; /* Fondo morado para el div */
+    border-radius: 12px; /* Bordes redondeados */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: bold;
+    margin: 200px 200px;
+
+}
+
+button {
+    background-color: #2196F3; /* Fondo azul para el botón */
+    color: white; /* Texto blanco en el botón */
+    padding: 10px 20px; /* Relleno del botón */
+    font-size: 18px; /* Tamaño de fuente del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima del botón */
+}
+
+button:hover {
+    background-color: #1565c0; /* Cambio de color al pasar el ratón por encima */
+}
+
+</style>

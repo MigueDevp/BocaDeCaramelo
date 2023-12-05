@@ -1,25 +1,45 @@
 <title>Boca de Caramelo</title>
-
-<form action="/login" method="post">
-    <div class="form_main">
-        <div class="heading">¡Bienvenido a Boca de Caramelo!</div>
-        <form>
-            <div class="inputContainer">
-                <span class="inputIcon"></span>
-                <input type="text" class="inputField" id="usuario" name="usuario" placeholder="Usuario">
-            </div>
-            
-            <div class="inputContainer">
-                <span class="inputIcon"></span>
-                <input type="password" class="inputField" id="password" name="password" placeholder="Contraseña">
-            </div>
-            <button id="button" type="submit" value="Iniciar" name="iniciar">Inicia Sesion</button>
-        </form>
-        <div class="signupContainer">
-            <p>¿Aun no tienes cuenta? <a href="/registrarse">Registrate</a></p>
+<div class="form_main">
+    <div class="heading">¡Regístrate en Boca de Caramelo!</div>
+    <form action="/registrarse" method="post" enctype="multipart/form-data">
+        <div class="inputContainer">
+            <span class="inputIcon"></span>
+            <input type="text" class="inputField" name="nombre" placeholder="Nombre" required>
         </div>
+        
+        <div class="inputContainer">
+            <span class="inputIcon"></span>
+            <input type="text" class="inputField" name="usuario" placeholder="Usuario" required>
+        </div>
+
+        <div class="inputContainer">
+            <span class="inputIcon"></span>
+            <input type="password" class="inputField" name="password" placeholder="Contraseña" required>
+        </div>
+
+        <div class="inputContainer">
+            <span class="inputIcon"></span>
+            <input type="file" class="inputField" name="foto" placeholder="Subir archivo" required>
+        </div>
+
+        <button id="button" value="Subir Archivo">Crear Usuario</button>
+    </form>
+    <div class="signupContainer">
+        <p>¿Ya tienes cuenta? <a href="/">Inicia Sesión</a></p>
     </div>
-  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,8 +49,7 @@
 
 
 <style>
-
-body {
+    body {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -62,8 +81,10 @@ body {
     );
   background-size: calc(1.732 * var(--s)) var(--s);
         }
-  .form_main {
 
+
+
+        .form_main {
   width: 380px;
   height: 600px;
   display: flex;
@@ -108,7 +129,7 @@ body {
   border-radius: 30px;
   margin: 10px 0;
   color: black;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: 500;
   box-sizing: border-box;
   padding-left: 30px;
@@ -152,12 +173,12 @@ body {
   border-bottom-right-radius: 100px;
   border-top-left-radius: 100px;
   filter: blur(10px);
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
 #button:hover::after {
   transform: translateX(600px);
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
 .signupContainer {
@@ -170,7 +191,7 @@ body {
 }
 
 .signupContainer p {
-  font-size: .9em;
+  font-size: 0.9em;
   font-weight: 500;
   color: black;
 }
@@ -183,8 +204,6 @@ body {
   text-decoration: none;
   padding: 8px 15px;
   border-radius: 20px;
-  margin-left:13px;
+  margin-left: 13px;
 }
-
-
 </style>
