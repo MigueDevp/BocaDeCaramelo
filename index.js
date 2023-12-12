@@ -3,18 +3,22 @@ var path=require("path");
 var cors=require("cors");
 var rutasUsuarios=require("./rutas/usuariosRutas");
 var rutasProductos=require("./rutas/productosBocaRutas");
-
-
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const session = require('cookie-session');
 const usuariosRutasApis = require("./rutas/usuariosRutasApis");
 const productosRutasApis = require("./rutas/productosBocaRutasApis");
-
+const passport = require("passport");
 
 var app=express();
- // Configuración de Express
- app.use(session({ secret: 'tu-secreto', resave: false, saveUninitialized: false }));
+
+ app.use(session({
+    secret:'secreto',
+    resave:true,
+    name: 'session',
+    keys: ['r9203jfj'],
+    maxAge: 24 * 60 * 60 * 1000, 
+    saveUninitialized:true
+  }));
+  
  app.use(passport.initialize());
  app.use(passport.session());
 app.set("view engine", "ejs");

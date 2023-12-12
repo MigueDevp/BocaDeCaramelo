@@ -39,7 +39,7 @@ async function nuevoProducto(newProducts){
     return error;
  }
  
- async function buscarPorIdP(id){
+ /*async function buscarPorIdP(id){
     var produc;
     try{
         var productoBD=await conexion.doc(id).get();
@@ -52,7 +52,28 @@ async function nuevoProducto(newProducts){
         console.log("Error al recuperar el usuario "+err);
     }
     return  produc;
- } 
+ } */
+
+
+async function buscarPorIdP(id) {
+    var product;
+    try {
+        var producto = await conexion.doc(id).get();
+        var productoObjeto = new Producto(producto.id, producto.data());
+        if (productoObjeto.bandera == 0) {
+            product = productoObjeto.obtenerProducto;
+            console.log("Se buscó correctamente el producto (FUNCION BUSCAR POR ID)");
+        }
+    } catch (err) {
+        console.log("Error al buscar al producto (FUNCION BUSCAR POR ID)" + err);
+        product = null;
+    }
+    return product;
+}
+
+
+
+
 
  /*async function buscarPorIdP(id){
     try {

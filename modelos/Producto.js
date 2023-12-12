@@ -35,9 +35,11 @@ class Producto {
         stock.length > 0 ? this._stock = stock : this.stock = 1;
     }
 
+
     set foto(foto) {
-        if (foto.length > 0) {
+        if (foto && foto.length !== undefined) {
             this._foto = foto;
+            this.bandera = foto.length === 0 ? 1 : 0;
         } else {
             this.bandera = 1;
         }

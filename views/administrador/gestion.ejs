@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th>Id del Usuario</th>
+                    <th>Nombre del Usuario</th>
                     <th>Nombre del Producto</th>
                     <th>Tamaño del Producto</th>
                     <th>Cantidad</th>
@@ -24,13 +25,15 @@
             <tbody>
                 <% compras.forEach((compra) => { %>
                     <tr>
-                        <td><%= compra.id %></td>
+                        <td><%= compra.idUsuario %></td>
+                        <td><%= compra.nombreUsuario %></td>
                         <td><%= compra.producto %></td>
                         <td><%= compra.tamaño %></td>
                         <td><%= compra.cantidad %></td>
                         
                     </tr>
                 <% }); %>
+                    
             </tbody>
         </table>
 

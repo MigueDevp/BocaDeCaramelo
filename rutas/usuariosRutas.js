@@ -1,36 +1,72 @@
 var ruta = require("express").Router();
 var { mostrarCompras } = require("../bd/compraBD"); 
-var {mostrarUsuarios, nuevoUsuario, buscarPorId, modificarUsuario,realizarCompra, borrarUsuario,login,obtenerDatosUsuarioPorId} = require("../bd/usuariosBD");
+var {mostrarUsuarios, nuevoUsuario, buscarPorId, modificarUsuario,realizarCompra,buscarUsuarioID, borrarUsuario,login,obtenerDatosUsuarioPorId} = require("../bd/usuariosBD");
 var {mostrarProductos,modificarProducto,borrarProducto,buscarPorIdP} = require("../bd/productosBD");
 var {nuevoProducto} = require("../bd/productosBD");
 var subirArchivo = require("../middlewares/middlewares").subirArchivo;
+var{autorizado}=require("../middlewares/password");
+var fs = require('fs').promises;
 
 
-//RUTA PRINCIPAL DE TODA LA PAGINA, DE AQUI INICIAN SESION LOS USUARIOS Y EL ADMINISTRADOR XD
-ruta.get("/", async (req, res) => {
-    res.render("usuarios/login");
+ruta.get("/login",async (req,res)=>{
+    res.render("usuarios/login")
 })
+ruta.get("/", autorizado,async(req,res)=>{
+    res.redirect("/login");
+  });
 
-
-ruta.post("/login", async (req, res) => {
-    const user = await login(req.body);
-
-    if (user === 1) {
-        res.render("usuarios/inicio");
-    } else if (user === 2) {
-         
-        res.render("administrador/home");
-        
-
-    } else if (user === 0) {
-        res.status(400).render("error", { error: "Contraseña no válida" });
-    } else {
-        res.status(400).render("error", { error: "El usuario no existe" });
-    }
+  ruta.get("/inicio/:id", autorizado,async(req,res)=>{
+   var user = await buscarUsuarioID(req.params.id);
+   if (user) {
+       res.render("usuarios/inicio", {user});
+   } else {
+       console.log("Usuario no existe");
+   }
 });
+
+ruta.post("/login",async(req,res)=>{
+    var user=await login(req.body);
+    if(user==undefined){
+       res.redirect("/login");
+       console.log("USUARIO INDEFINIDO");
+    }else{
+       if(user.admin){
+          console.log("Administrador");
+          req.session.admin=req.body.usuario;
+          res.redirect("/home/" + user.id);
+       }else{
+          console.log("Usuario");
+          req.session.usuario=req.body.usuario;
+          res.redirect("/inicio/" + user.id);
+       }
+    }
+ });
+
+/*ruta.post("/login",async(req,res)=>{
+    var user=await login(req.body);
+    if(user==undefined){
+       res.redirect("/login")
+       console.log("Usuario no Valido"); 
+    }else{
+       if(user.admin){
+          console.log("Administrador");
+          req.session.admin=req.body.usuario;
+          res.redirect("/home");
+       }else{
+          console.log("Usuario");
+          req.session.usuario=req.body.usuario;
+          res.redirect("/inicio/" + user.id);
+       }
+    }
+ });*/
 
 ruta.get("/registrarse", async (req, res) => {
     res.render("usuarios/registrate");
+})
+
+ruta.get("/menu",async (req,res)=>{
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("templat/menu.ejs",{user});
 })
 
 ruta.post("/registrarse",subirArchivo(),async(req,res)=>{
@@ -40,26 +76,22 @@ ruta.post("/registrarse",subirArchivo(),async(req,res)=>{
 });
 
 
-
-ruta.get("/inicio", async (req,res) => { 
-    var user = await mostrarUsuarios();
-    res.render("usuarios/inicio",{user});
+ruta.get("/nosotros/:id", async (req,res) => { 
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/nosotros",{user});
 })
 
-ruta.get("/nosotros", async (req,res) => { 
-    res.render("usuarios/nosotros");
-})
-
-ruta.get("/comprar", async (req, res) => {
+ruta.get("/comprar/:id",autorizado, async (req, res) => {
     var products = await mostrarProductos();
-    res.render("usuarios/productos", {products}) ;
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/productos", {products,user}) ;
    
 });
 
 
-
-ruta.get("/ubicacion" , async (req,res) => {
-    res.render("usuarios/ubicacion");
+ruta.get("/ubicacion/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/ubicacion",{user});
 })
 
 ruta.get("/editarPerfil/:id", async (req, res) => {
@@ -76,31 +108,26 @@ ruta.post("/editarUsuario",subirArchivo(),async(req,res)=>{
     else{
         req.body.foto = req.body.fotoVieja;
     }
-    var usuario=await modificarUsuario(req.body);
-    console.log("usuario",{usuario});
-    res.redirect("/perfil");
+    var userId = req.body.id;
+    var user=await modificarUsuario(req.body);
+    console.log("MODIFICADO");
+    res.redirect("/perfil/"+ userId);
  });
 
-ruta.get("/perfil", async (req, res) => {
-    try {
-        const usuarios = await mostrarUsuarios();
-        
-        if (usuarios.length > 0) {
-            const user = usuarios[0];
-            res.render("usuarios/perfil", { user });
-            console.log(user);
-        } else {
-            res.status(400).render("error", { error: "No hay usuarios disponibles" });
-        }
-    } catch (err) {
-        res.status(500).render("error", { error: "Error al cargar el perfil" });
-    }
-});
+ 
+ ruta.get("/perfil/:id", async (req, res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/perfil", {user});
+ });
+ 
 
 
-ruta.get("/cerrarSesion" , async (req,res) => {
-    res.render("usuarios/login");
-})
+
+
+ruta.get("/cerrarSesion",(req,res)=>{
+    req.session=null;
+    res.redirect("/login");
+ });
 
 ruta.get("/borrarPerfil/:id",async(req,res)=>{
     await borrarUsuario(req.params.id);
@@ -108,39 +135,44 @@ ruta.get("/borrarPerfil/:id",async(req,res)=>{
 })
 
 //RUTAS DE LAS CAREGORIAS DE COMIDAAAA
-ruta.get("/bebidas" , async (req,res) => {
-    res.render("usuarios/bebidas");
+ruta.get("/bebidas/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/bebidas",{user});
 })
 
-ruta.get("/dulces" , async (req,res) => {
-    res.render("usuarios/dulces");
+ruta.get("/dulces/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/dulces",{user});
 })
 
-ruta.get("/galletas" , async (req,res) => {
-    res.render("usuarios/galletas");
+ruta.get("/galletas/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/galletas",{user});
 })
 
-ruta.get("/comidaR" , async (req,res) => {
-    res.render("usuarios/comidaR");
+ruta.get("/comidaR/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/comidaR",{user});
 })
 
-ruta.get("/helados" , async (req,res) => {
-    res.render("usuarios/helados");
+ruta.get("/helados/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/helados",{user});
 })
 
-ruta.get("/chicles" , async (req,res) => {
-    res.render("usuarios/chicles");
+ruta.get("/chicles/:id" , async (req,res) => {
+    var user = await buscarUsuarioID(req.params.id);
+    res.render("usuarios/chicles",{user});
 })
 
-ruta.get("/home" , async (req,res) => {
-    res.render("administrador/home");
-});
 
 //RUTA DE ADMINISTRADOR
 
-ruta.get("/home" , async (req,res) => {
-    res.render("administrador/home");
+ruta.get("/home/:id" , autorizado,async (req,res) => {
+    var admin = await buscarUsuarioID(req.params.id);
+    res.render("administrador/home",{admin});
 });
+
 
 ruta.get("/perfilAdmin" , async (req,res) => {
     res.render("administrador/perfilAdmin");
@@ -190,7 +222,12 @@ ruta.get("/borrarProducto/:id",async(req,res)=>{
 
 ruta.post("/realizarCompra", async (req, res) => {
     try {
+
+        console.log(req.body);
+
         const datosCompra = {
+            idUsuario:req.body.id,
+            nombreUsuario:req.body.nombre,
             producto: req.body.producto,
             tamaño: req.body.tamaño,
             cantidad: req.body.cantidad,

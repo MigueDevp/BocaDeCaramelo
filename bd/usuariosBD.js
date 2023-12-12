@@ -26,7 +26,7 @@ async function mostrarUsuarios(){
 }
 
 
-async function login(datos){
+/*async function login(datos){
     var user;
     var usuarioBd = await conexion.where("usuario","==",datos.usuario).get();
     if(usuarioBd.empty){
@@ -51,6 +51,66 @@ async function login(datos){
         });
     }
     return user;
+}*/
+
+
+/*async function login(datos){
+    var user = undefined;
+    var usuarioObjeto;
+    try{
+        var usuarios = await conexion.where('usuario','=',datos.usuario).get();
+        if(usuarios.empty){
+            console.log("indefinido");
+            return undefined;
+        } 
+        usuarios.docs.filter((doc)=>{
+            var validar = validarPassword(datos.password,doc.data().password,doc.data().salt);
+            if(validar){
+                usuarioObjeto = new Usuario(doc.id,doc.data());
+                if(usuarioObjeto.bandera==0){ 
+                    user=usuarioObjeto.obtenerUsuario;
+                }
+            }
+            else 
+                return undefined;
+        });
+    }
+    catch(err){
+        console.log("Error al recuperar al usuario: "+ err);
+    }
+    return user;
+}*/
+async function login(datos) {
+    var user = undefined;
+    var usuarioObjeto;
+
+    try {
+        var usuarios = await conexion.where('usuario', '=', datos.usuario).get();
+
+        if (usuarios.empty) {
+            console.log("indefinido");
+            return undefined;
+        }
+
+        usuarios.docs.forEach((doc) => {
+            var validar = validarPassword(datos.password, doc.data().password, doc.data().salt);
+            console.log("se esta comparando");
+            if (validar) {
+                usuarioObjeto = new Usuario(doc.id, doc.data());
+                
+                if (usuarioObjeto.bandera === 0) {
+                    user = usuarioObjeto.obtenerUsuario;
+                }
+            } else {
+                return undefined;
+                
+            }
+        });
+    } catch (err) {
+        console.log("Error al recuperar al usuario: " + err);
+    }
+
+    return user;
 }
 
 
@@ -58,7 +118,7 @@ async function login(datos){
 
 
 //FUNCION PARA CREAR UN NUEVO USUARIO
-async function nuevoUsuario(datos){
+/*async function nuevoUsuario(datos){
     var {salt,hash}=generarPassword(datos.password);
     datos.salt=salt;
     datos.password=hash;
@@ -82,7 +142,36 @@ async function nuevoUsuario(datos){
         
     }
     return error;
- }
+ }*/
+
+ async function nuevoUsuario(datos){
+    var{salt,hash}=generarPassword(datos.password);
+    datos.password=hash;
+    datos.salt=salt;
+   datos.admin=false;
+
+   const existeUsuario = await usuarioExiste(datos.usuario);
+
+   if (existeUsuario) {
+       console.log("El usaurio ya existe en la base de datos");
+       return {
+           error: 1
+       };
+   }
+
+   var usuario=new Usuario(null,datos);
+   var error=1;
+   if(usuario.bandera==0){
+       try{
+           await conexion.doc().set(usuario.obtenerUsuario);
+           console.log("Usuario registrado Correctamente");
+           error=0;
+       }catch(err){
+           console.log("Error al registrar el usuario"+err);
+       }
+   }
+   return error;
+}
 
 
  /*async function buscarPorId(id){
@@ -119,6 +208,22 @@ async function nuevoUsuario(datos){
     }
     return usuarioObjeto1;
 }*/
+
+async function buscarUsuarioID(id){
+    var user;
+    try{
+        var usuario=await conexion.doc(id).get();
+        var usuarioObjeto=new Usuario(usuario.id, usuario.data());
+        if(usuarioObjeto.bandera==0){
+            user=usuarioObjeto.obtenerUsuario;
+            console.log("Se busco correctamente el usuario");
+        }
+    }catch(err){
+        console.log("Error al buscar al usuario"+err);
+        user = null;
+    }
+    return user;
+}
 async function buscarPorId(id){
     try {
         if (!id) {
@@ -177,7 +282,7 @@ async function buscarPorId(id){
 }*/
 
 //FUNCION PARA MODIFICAR UN USUARIO
- async function modificarUsuario(datos){
+ /*async function modificarUsuario(datos){
     var error=1;
     var usuario=await buscarPorId(datos.id);
     if(usuario!=undefined){ 
@@ -207,7 +312,60 @@ async function buscarPorId(id){
         }
     }
         return error;
+}*/
+
+async function modificarUsuario(datos) {
+    try {
+        // Obtener el usuario existente
+        var user = await buscarUsuarioID(datos.id);
+
+        if (user) {
+            // Comprobar si datos.password está presente y procesarlo si es necesario
+            if (datos.password) {
+                if (Array.isArray(datos.password)) {
+                    datos.password = datos.password.join('');
+                }
+
+                if (typeof datos.password !== 'string') {
+                    console.log("Error: datos.password is not a valid string");
+                    console.log("Value of datos.password:", datos.password);
+                    return 1; // Otra opción sería lanzar un error en lugar de devolver 1
+                }
+
+                var { salt, hash } = generarPassword(datos.password);
+                datos.password = hash;
+                datos.salt = salt;
+            } else {
+                // Si no se proporciona nueva contraseña, mantener la actual
+                datos.password = user.password;
+                datos.salt = user.salt;
+            }
+
+            // Mantener el valor actual de "admin" si no se proporciona uno nuevo
+            datos.admin = typeof datos.admin !== 'undefined' ? datos.admin : user.admin;
+
+            // Crear el objeto Usuario modificado
+            var modifiedUser = new Usuario(datos.id, datos);
+
+            if (modifiedUser.bandera === 0) {
+                // Actualizar el documento en Firestore
+                await conexion.doc(modifiedUser.id).set(modifiedUser.obtenerUsuario);
+                console.log("Usuario actualizado");
+                return 0;
+            } else {
+                console.log("Error en los datos del usuario");
+                return 1;
+            }
+        } else {
+            console.log("Error: Usuario no encontrado");
+            return 1;
+        }
+    } catch (err) {
+        console.log("Error al modificar usuario: " + err);
+        return 1;
+    }
 }
+
 //FUNCION PARA BORRAR UN USUARIO
  async function borrarUsuario(id){
     var error=1;
@@ -231,12 +389,14 @@ async function buscarPorId(id){
  async function realizarCompra(datosCompra) {
     try {
         await conexionVentas.add({
+            idUsuario:datosCompra.idUsuario,
+            nombreUsuario:datosCompra.nombreUsuario,
             producto: datosCompra.producto,
             tamaño: datosCompra.tamaño,
             cantidad: datosCompra.cantidad,
         });
 
-        console.log("Compra realizada con éxito");
+        console.log("Compra realizada con éxito",);
         return { success: true, message: "Compra realizada con éxito." };
     } catch (error) {
         console.log("Error al realizar la compra", error);
@@ -244,21 +404,26 @@ async function buscarPorId(id){
     }
 }
 
-
-
-
-
-
-
+async function usuarioExiste(nombreUsuario) {
+    try {
+        const snapshot = await conexion.where('usuario', '==', nombreUsuario).get();
+        return !snapshot.empty; // Retorna verdadero si hay un usuario con ese nombre
+    } catch (error) {
+        console.log("Error al verificar si el usuario existe:", error);
+        return false; // Por defecto, en caso de error, retorna falso
+    }
+}
 
 
  module.exports={
     mostrarUsuarios,
     nuevoUsuario,
     buscarPorId,
+    usuarioExiste,
     modificarUsuario,
     borrarUsuario,
     login,
+    buscarUsuarioID,
     realizarCompra
  }
 

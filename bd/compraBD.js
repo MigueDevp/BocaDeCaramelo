@@ -1,42 +1,24 @@
 const Compra = require("../modelos/Compra");
 var conexion=require("../bd/conexion").conexionVentas;
 
-
-/*async function mostrarCompras() {
+async function mostrarCompras() {
     var compras = [];
     try {
-        var comprasBD = await conexion.conexionVentas.get();
+        var comprasBD = await conexion.get();
         comprasBD.forEach(compra => {
-            var compraObj = new Compra(compra.id, compra.data());
-            if (compraObj.bandera === 0) {
-                compras.push(compraObj.obtenerCompra);
+            console.log("Data de compra:", compra.data()); // Agrega esta línea
+            var compra1 = new Compra(compra.id, compra.data());
+            if (compra1.bandera == 0) {
+                compras.push(compra1.obtenerCompra);
             }
         });
+        console.log("Compras obtenidas:", compras);
     } catch (err) {
-        console.log("Error al mostrar compras " + err);
+        console.log("Error al mostrar compras: " + err);
     }
-
     return compras;
-}*/
-
-async function mostrarCompras(){
-    var compras=[];
-    try{
-        var comprasBD= await conexion.get();
-        comprasBD.forEach(compra =>{
-        console.log(comprasBD);
-         var compra1=new Compra(compra.id,compra.data())
-     if (compra1.bandera==0){
-        compras.push(compra1.obtenerCompra);
-     }
-    })
-    }catch(err){
-        console.log("Error al mostrar comprasss "+err); 
-     }
-    
-     return compras;
-    
 }
+
 
 module.exports = {
     mostrarCompras

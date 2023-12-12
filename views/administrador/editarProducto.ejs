@@ -10,6 +10,10 @@
         <div class="card-body"></div>
         <form action="/editarProducto" method="post" enctype="multipart/form-data">
             <div class="form-group">
+                <input type="hidden" name="id" id="id" value="<%=producto.id%>">
+                <input type="hidden" name="fotoVieja" id="fotoVieja" value="<%=producto.foto%>">
+            </div>
+            <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="<%= producto.nombre %>">
             </div>
